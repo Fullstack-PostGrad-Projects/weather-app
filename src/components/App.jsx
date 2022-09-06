@@ -1,10 +1,14 @@
 import React from "react";
+import MyLocation from "./MyLocation";
 
 
 const App = () =>{
     return(
-        <h1>Hello World!</h1>
-    )
+    <>
+        <MyLocation/>
+        <h1>Hello World!</h1>1
+    </>
+)
 }
 
 
