@@ -1,12 +1,16 @@
-import React from "react";
-import MyLocation from "./MyLocation";
+import React, { useState, useEffect } from 'react';
+import {  Routes, Route } from 'react-router-dom';
+import {MyLocation, Geolocation} from "./";
 
 
 const App = () =>{
     return(
     <>
-        <MyLocation/>
-        <h1>Hello World!</h1>1
+    <Routes>
+        <Route path='/' element={<MyLocation/>} />
+        <Route path='/location' element={<Geolocation/>}/>
+    </Routes>
+        
     </>
 )
 }
