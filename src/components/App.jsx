@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import {MyLocation, Geolocation} from "./";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () =>{
+    
     return(
     <>
     <Routes>
