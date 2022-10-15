@@ -3,12 +3,15 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import { getLocationFromSearch, getWeatherFromCoordinates } from "../api";
+import Loading from "./Loading";
 
 const Geolocation = () =>{
     const [searchTerm, setSearchTerm] = useState('')
     const [location, setLocation] = useState('')
     const [longitute, setLongitude] = useState('')
     const [latitude, setLatitude] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+
 
 
 
