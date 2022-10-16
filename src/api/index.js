@@ -32,6 +32,7 @@ export const getMetadataFromCoordinates = async (lon, lat) => {
 
   export const getWeatherFromCoordinates = async (lon, lat) => {
     try {
+
       const response = await fetch(`https://fnw-us.foreca.com/api/v1/current/${lon},${lat}&tempunit=F&windunit=MPH`, {
         headers: {
           "Content-Type": "application/json",
