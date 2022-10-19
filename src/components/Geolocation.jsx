@@ -3,12 +3,18 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import { getLocationFromSearch, getWeatherFromCoordinates } from "../api";
+import Loading from "./Loading";
+import Container from "react-bootstrap/Container";
+
 
 const Geolocation = () =>{
     const [searchTerm, setSearchTerm] = useState('')
     const [location, setLocation] = useState('')
     const [longitute, setLongitude] = useState('')
     const [latitude, setLatitude] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [weatherImage, setWeatherImage] = useState('')
+
 
 
 
@@ -33,6 +39,7 @@ const Geolocation = () =>{
     
     return(
         <>
+        <Container>
         <h1>Hello World!</h1>
         <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
@@ -44,6 +51,7 @@ const Geolocation = () =>{
             />
             <Button variant="outline-info">Search</Button>
           </Form>
+          </Container>
         </>
     )
 }
