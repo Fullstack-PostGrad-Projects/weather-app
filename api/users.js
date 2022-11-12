@@ -8,14 +8,6 @@ const { createUser, grabUserById, updateUser, grabAllUsers } = require("../db");
 router.post("/register", async (req, res, next) => {
   const { name, password } = req.body;
   try {
-    const user = await grabUserById({ userId });
-    if (user) {
-      next({
-        name: "errorUserExists",
-        message: `User already has an account.`,
-        error: "error",
-      });
-    }
     if (password.length < 8) {
       next({
         name: "errorPasswordLength",
@@ -23,16 +15,21 @@ router.post("/register", async (req, res, next) => {
         error: "error",
       });
     }
+    console.log("before creating user")
     const newUser = await createUser({ name, password });
+    console.log(newUser, "this is new user")
+    console.log("after creating user")
     const token = jwt.sign({ id: newUser.id, name }, JWT_SECRET, {
       expiresIn: "1w",
     });
     res.send({
         message: "Thanks for signing up!",
         token,
-        user,
-    })
+        newUser,
+    });
   } catch ({name,message,error}) {
     next({name,message,error});
   }
 });
+
+module.exports = router
