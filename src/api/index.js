@@ -1,5 +1,7 @@
 export const getLocationFromSearch = async (searchTerm) => {
     try {
+      console.log(process.env.REACT_APP_geoForwardAPI, 'work please')
+      console.log(searchTerm, 'what I put in')
       const response = await fetch(`https://api.geoapify.com/v1/geocode/search?text=${searchTerm}&limit=1&apiKey=${process.env.REACT_APP_geoForwardAPI}`, {
         headers: {
           "Content-Type": "application/json",

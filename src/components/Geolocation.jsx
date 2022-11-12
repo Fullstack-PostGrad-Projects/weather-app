@@ -1,10 +1,10 @@
-import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import React, { useState } from "react";
 import { getLocationFromSearch, getWeatherFromCoordinates } from "../api";
 import Loading from "./Loading";
 import Container from "react-bootstrap/Container";
+import WeatherSearchCard from "./WeatherSearchCard";
 
 
 const Geolocation = () =>{
@@ -14,6 +14,8 @@ const Geolocation = () =>{
     const [latitude, setLatitude] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [weatherImage, setWeatherImage] = useState('')
+    const [searchWeatherResults, setSearchWeatherResults] = useState({})
+    // const [cityName, setCityName] = useState('')
 
 
 
@@ -25,15 +27,27 @@ const Geolocation = () =>{
     const  handleSubmit = async (event) =>{
         event.preventDefault()
         console.log(searchTerm, 'here I am')
+
         const searchLocation = await getLocationFromSearch(searchTerm)
         setLongitude(searchLocation.features[0].properties.lon)
         setLatitude(searchLocation.features[0].properties.lat)
+        // setSearchTerm(searchLocation.features[0].properties.address_line1)
 
         const test = await getWeatherFromCoordinates(searchLocation.features[0].properties.lon, searchLocation.features[0].properties.lat)
         console.log(test, 'imagine')
-        // console.log(searchLocation.features[0].properties.lon, 'this is it!')
-        // setLocation(searchLocation)
+        test.current.cityName = searchLocation.features[0].properties.address_line1
+        setSearchWeatherResults(test.current)
 
+        setIsLoading(true)
+
+
+        //getting the relevant weather data
+
+        /*
+        
+
+        */
+        
     }
 
     
@@ -51,6 +65,7 @@ const Geolocation = () =>{
             />
             <Button variant="outline-info">Search</Button>
           </Form>
+          {isLoading ? <WeatherSearchCard setIsLoading={setIsLoading} searchWeatherResults={searchWeatherResults}/> : <></>}
           </Container>
         </>
     )
