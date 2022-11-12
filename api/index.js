@@ -70,3 +70,4 @@ apiRouter.use((error, req, res, next) => {
     error: error.error,
   });
 });
+module.exports = apiRouter

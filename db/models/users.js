@@ -12,7 +12,7 @@ const createUser = async ({ name, password }) => {
       `
         INSERT INTO users (name, password)
         VALUES ($1, $2)
-        RETURNING *;
+        RETURNING name, id;
         `,
       [name, hashedPassword]
     );
