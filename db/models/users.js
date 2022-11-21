@@ -3,18 +3,18 @@ const bcrypt = require("bcrypt");
 
 const SALT_COUNT = 10;
 
-const createUser = async ({ name, password }) => {
+const createUser = async ({ username, password }) => {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-        INSERT INTO users (name, password)
+        INSERT INTO users (username, password)
         VALUES ($1, $2)
-        RETURNING name, id;
+        RETURNING username, id;
         `,
-      [name, hashedPassword]
+      [username, hashedPassword]
     );
     return user;
   } catch (error) {
@@ -23,13 +23,29 @@ const createUser = async ({ name, password }) => {
   }
 };
 
+const grabUserByUsername = async ({ username }) => {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      SELECT name as username
+      FROM users 
+      WHERE id = $1
+    `,
+    [username]
+    );
+    return user;
+  } catch (error) {}
+};
+
 const grabUserById = async ({ userId }) => {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      SELECT id, name
+      SELECT id, username
       FROM users
       WHERE id = $1
       `,
@@ -92,4 +108,5 @@ module.exports = {
   grabUserById,
   updateUser,
   grabAllUsers,
+  grabUserByUsername
 };
