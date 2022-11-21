@@ -36,6 +36,12 @@ const Geolocation = () =>{
         const test = await getWeatherFromCoordinates(searchLocation.features[0].properties.lon, searchLocation.features[0].properties.lat)
         console.log(test, 'imagine')
         test.current.cityName = searchLocation.features[0].properties.address_line1
+        test.current.country = searchLocation.features[0].properties.country
+        test.current.formatted = searchLocation.features[0].properties.formatted
+        test.current.city = searchLocation.features[0].properties.city
+
+
+
         setSearchWeatherResults(test.current)
 
         setIsLoading(true)

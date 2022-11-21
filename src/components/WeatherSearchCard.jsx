@@ -13,7 +13,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading}) {
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} />
       <Card.Body>
-        <Card.Title>{weatherObj.cityName}</Card.Title>
+        <Card.Title>{weatherObj.city ? `${weatherObj.city}, ${weatherObj.country}` : weatherObj.country}</Card.Title>
         <Card.Text>
           {weatherObj.temperature}°F
         </Card.Text>
