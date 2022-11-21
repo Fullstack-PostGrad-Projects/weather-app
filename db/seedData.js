@@ -24,7 +24,7 @@ async function buildTables() {
       await client.query(`
       CREATE TABLE users(
         id SERIAL PRIMARY KEY,
-        name varchar(255) NOT NULL,
+        name varchar(255) UNIQUE NOT NULL,
         password varchar(255) NOT NULL
       );
       CREATE TABLE starred(
