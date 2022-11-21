@@ -9,7 +9,8 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading}) {
   
 
 
-  return (
+  return ( 
+    <div className="weatherContainer">
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} />
       <Card.Body>
@@ -28,6 +29,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading}) {
         <Card.Link href="#">14 Days</Card.Link>
       </Card.Body>
     </Card>
+    </div>
   )
 }
 

@@ -27,3 +27,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.weatherContainer{
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+  height: 100%;
+  width: 100%;
+}
