@@ -30,4 +30,19 @@ router.get("/stared", async (req, res, next)=>{
     })
   }
 })
+
+router.delete("/:id", async (req, res, next)=>{
+try {
+  const { id } = req.params
+  const response = await removeStarByUser(id)
+  res.send(response)
+  
+} catch (error) {
+  next({
+    name,
+    message : "oops an error in delete star from user DB",
+    error
+  })
+}
+})
 module.exports = router
