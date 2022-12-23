@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import WeatherSearchCard from "./WeatherSearchCard";
 
 
-const Geolocation = () =>{
+const Geolocation = ({button, setButton}) =>{
     const [searchTerm, setSearchTerm] = useState('')
     const [location, setLocation] = useState('')
     const [longitute, setLongitude] = useState('')
@@ -73,6 +73,7 @@ const Geolocation = () =>{
           </Form>
           {isLoading ? <WeatherSearchCard setIsLoading={setIsLoading} searchWeatherResults={searchWeatherResults}/> : <></>}
           </Container>
+          
         </>
     )
 }
