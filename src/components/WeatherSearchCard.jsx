@@ -9,16 +9,16 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading}) {
 
 
     const updateTime = (timestamp)=>{
-      let date = ''
       let time = ''
-
+      console.log(timestamp, 'what Im working with')
       for(let i = 0; i<timestamp.length; i++){
-        date+= timestamp.charAt(i)
         if(timestamp.charAt(i) === 'T'){
-          date = date.slice(0,i)
-          time = timestamp.slice(i+1,i+6)
-          setReadableTime(time.concat(' ' + date))
-          console.log(time, date, 'dabiys')
+          let isoDate = timestamp.slice(0,i)
+          let isoTime = timestamp.slice(i+1, i+6)
+          const date = new Date(isoDate.replace(/-/g, '\/')).toDateString()
+          console.log(isoDate, 'datteeeee')
+          console.log(date, 'hereeeeee')
+          setReadableTime(date + ' ' + isoTime)
         }
       }
     }
@@ -35,9 +35,9 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading}) {
       <Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} />
       <Card.Body>
         <Card.Title>{weatherObj.city ? `${weatherObj.city}, ${weatherObj.country}` : weatherObj.country}</Card.Title>
-        <Card.Text>
+        <Card.Text className="tempLine">
           {weatherObj.temperature}°F
-          Feels Like {weatherObj.feelsLikeTemp}°F
+          <small>Feels Like {weatherObj.feelsLikeTemp}°F</small>
 
         </Card.Text>
       </Card.Body>
