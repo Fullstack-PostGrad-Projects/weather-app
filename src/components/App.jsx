@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
-import {MyLocation, Geolocation, Homepage} from "./";
+import {MyLocation, Geolocation, Homepage, Header, WrongPage} from "./";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () =>{
@@ -9,8 +9,13 @@ const App = () =>{
     return(
     <>
     <Routes>
-        <Route path='/' element={<Homepage button={button} setButton={setButton}/>} />
-        <Route path='/location' element={<Geolocation button={button} setButton={setButton}/>}/>
+        <Route exact path='/' element={<Header />}>
+        <Route index element={<Geolocation button={button} setButton={setButton}/>}/>
+        <Route path='/login' element={<Homepage />} />
+
+        </Route>
+      <Route path="*" element={<WrongPage />} />
+
     </Routes>
         
     </>
