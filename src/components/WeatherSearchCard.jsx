@@ -22,7 +22,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
   const [isFavorite, setIsFavorite] = useState(false);
 
     const weatherObj = {...searchWeatherResults}
-    
+    // console.log(weatherObj, 'what is passed in')
 
     const updateTime = (timestamp)=>{
       let time = ''
@@ -62,7 +62,8 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
       <Card.Header>{readableTime}</Card.Header>
       <Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} />
       <Card.Body>
-        <Card.Title>{weatherObj.city ? `${weatherObj.city}, ${weatherObj.country}` : weatherObj.country}</Card.Title>
+        {/* <Card.Title>{weatherObj.city ? `${weatherObj.cityName}, ${weatherObj.country}` : weatherObj.country}</Card.Title> */}
+        <Card.Title>{weatherObj.formatted}</Card.Title>
         <Card.Text className="tempLine" id="tempBlock">
           
           <span id="bigText">{weatherObj.temperature}°F</span><small>Feels Like {weatherObj.feelsLikeTemp}°F</small>
