@@ -10,7 +10,7 @@ const Header = () => {
   // console.log(NavDropdown, 'whats inside')
   return (
     <>
-    <Navbar bg="light" expand="lg">
+    <Navbar collapseOnSelect bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">Weathering with You</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -18,15 +18,17 @@ const Header = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/login">Log In</Nav.Link>
             <Nav.Link as={Link} to="/register">Register</Nav.Link>
+            <Nav.Link as={Link} to="/cityprofile">cityprofile</Nav.Link>
+            <Nav.Link as={Link} to="/profile">profile</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item as={Link} to="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="#action/3.2">
                 Another action
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item as={Link} to="/cityprofile">
+                City Profile
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

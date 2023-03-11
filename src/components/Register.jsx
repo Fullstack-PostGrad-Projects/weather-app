@@ -5,25 +5,92 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
 const Register = () => {
-  const [validatedPassword, setValidatedPassword] = useState(false);
   const [show, setShow] = useState(false);
   const [modalMessage, setModalMessage] = useState("Not enough characters");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const passwordChecker = (password) => {
-    // if()
+
+  const passNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+  const passSpecialChar = [
+    "`",
+    "~",
+    "!",
+    "@",
+    "#",
+    "$",
+    "%",
+    "^",
+    "&",
+    "*",
+    "(",
+    ")",
+    "-",
+    "_",
+    "=",
+    "+",
+    "[",
+    "]",
+    "{",
+    "}",
+    ":",
+    ";",
+    "<",
+    ",",
+    ">",
+    ".",
+    "?",
+    "/"
+  ];
+
+  const passwordNumChecker = (password) => {
+    for (let num of passNumber) {
+      if (password.includes(num)) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const passwordCharChecker = (password) => {
+    for (let char of passSpecialChar) {
+      if (password.includes(char)) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const modalErrorMessage = (passwordNumChecker, passwordCharChecker) => {
+    if (!passwordCharChecker && !passwordNumChecker) {
+      setModalMessage("Missing at least one number and special character");
+      handleShow();
+      return true;
+    } else if (!passwordNumChecker) {
+      setModalMessage("Missing at least one number");
+      handleShow();
+
+      return true;
+    } else if (!passwordCharChecker) {
+      setModalMessage("Missing at least one special character");
+      handleShow();
+      return true;
+    }
+  };
+  const handlePassword = (event, password) => {
+    if (password.length < 8) {
+      setModalMessage("Must be at least 8 characters long");
+      handleShow();
+      event.currentTarget.formBasicPassword.value = "";
+      return true;
+    }
+    const numCheck = passwordNumChecker(password);
+    const charCheck = passwordCharChecker(password);
+    if (modalErrorMessage(numCheck, charCheck)) {
+      event.currentTarget.formBasicPassword.value = "";
+    }
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleShow();
-    console.log(event.currentTarget.formBasicEmail.value);
-    console.log(event.currentTarget.formBasicPassword.value);
-    event.currentTarget.formBasicPassword.value = "";
-
-    // console.log("I was clicked");
-    // console.log(event.target[0].value);
-    // console.log(event.target[1].value);
+    handlePassword(event, event.currentTarget.formBasicPassword.value);
   };
   return (
     <>
@@ -39,11 +106,7 @@ const Register = () => {
         </Modal.Footer>
       </Modal>
       <Container>
-        <Form
-          validated={validatedPassword}
-          onSubmit={handleSubmit}
-          id="formLayout"
-        >
+        <Form onSubmit={handleSubmit} id="formLayout">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" required />
@@ -57,8 +120,9 @@ const Register = () => {
             <Form.Control type="password" placeholder="Password" required />
 
             <Form.Text id="passwordHelpBlock" muted>
-              Your password must be 8-20 characters long, contain letters,
-              numbers, and at least one special character.
+              Your password must contain a minimum of 8 characters and at least
+              one number and special characters, numbers, and at least one
+              special character.
             </Form.Text>
           </Form.Group>
           <div className="d-grid gap-2">
