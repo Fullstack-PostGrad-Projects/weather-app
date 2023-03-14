@@ -1,8 +1,8 @@
 const { Client } = require("pg");
+const { DATABASE_URL } = process.env
 
 
-
-const DB_NAME = "weather-wizard";
+const DB_NAME = "DariusRobinson/WeatherWizard";
 
 const DB_URL =
   process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
