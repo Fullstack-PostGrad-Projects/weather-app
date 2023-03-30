@@ -16,8 +16,8 @@ function Homepage() {
   // }
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.currentTarget.formBasicEmail.value);
-    console.log(event.currentTarget.formBasicPassword.value);
+    console.log(event.currentTarget.floatingInputEmail.value);
+    console.log(event.currentTarget.floatingInputPassword.value);
 
     // console.log("I was clicked");
     // console.log(event.target[0].value);
@@ -27,13 +27,13 @@ function Homepage() {
   return (
     <Container>
         <Form onSubmit={handleSubmit} id="formLayout">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicText">
             <FloatingLabel
               controlId="floatingInputEmail"
-              label="Email address"
+              label="Username"
               className="mb-3"
             >
-              <Form.Control type="email" placeholder="Enter email" required />
+              <Form.Control type="text" placeholder="Enter username" required />
             </FloatingLabel>
           </Form.Group>
 
@@ -56,7 +56,7 @@ function Homepage() {
           <span>or</span>
         </div>
         <div className="d-grid gap-2">
-          <Button as={Link} to='/register' variant="outline-primary" size="lg">
+          <Button variant="outline-primary" size="lg">
             Sign up
           </Button>
         </div>

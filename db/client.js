@@ -1,15 +1,14 @@
 const { Client } = require("pg");
 
-
-
 const DB_NAME = "weather-wizard";
 
 const DB_URL =
   process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
 
+let client;
 
 
-let client = new Client(
+  client = new Client(
     (config = {
       connectionString: DB_URL,
       ssl:
@@ -19,6 +18,8 @@ let client = new Client(
     })
 );
 
-
+// client.query('SELECT * FROM "ksglasper/weathering-with-you"."Historical Apportionment" limit 10;', (err, res) => {
+//   console.table(res.rows); // you could also just console.log, but console.table is neat :)
+// });
 
 module.exports = client;

@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { BsStar, BsStarFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import {
   WiDirectionDownLeft,
   WiDirectionDownRight,
@@ -60,7 +61,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
           <BsStar onClick={handleOnClick} size="2rem" />
         )}
       <Card.Header>{readableTime}</Card.Header>
-      <Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} />
+      <Link to='/cityprofile'><Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} /></Link>
       <Card.Body>
         {/* <Card.Title>{weatherObj.city ? `${weatherObj.cityName}, ${weatherObj.country}` : weatherObj.country}</Card.Title> */}
         <Card.Title>{weatherObj.formatted}</Card.Title>
@@ -70,6 +71,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
           
         </Card.Text>
       </Card.Body>
+      
       <ListGroup className="list-group-flush">
         <ListGroup.Item>{weatherObj.windSpeed}mph {weatherObj.windDirString}</ListGroup.Item>
         {/* <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
