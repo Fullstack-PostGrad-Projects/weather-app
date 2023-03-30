@@ -30,7 +30,7 @@ export const getMetadataFromCoordinates = async (lon, lat) => {
       }
     );
     const result = await response.json();
-    console.log(result, "the weather api");
+    // console.log(result, "the weather api");
     return result;
   } catch (error) {
     console.error(error);
@@ -55,6 +55,26 @@ export const getWeatherFromCoordinates = async (lon, lat) => {
     console.error(error);
   }
 };
+
+export const getDailyForecast = async (location) => {
+  try {
+    const response = await fetch(
+      `https://fnw-us.foreca.com/api/v1/forecast/daily/${location}&tempunit=F&windunit=MPH&periods=14`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.REACT_APP_forecaAPI}`,
+        },
+      }
+    );
+    const result = await response.json();
+    console.log(result, "the weather api");
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
 // USER FUNCTIONS
 

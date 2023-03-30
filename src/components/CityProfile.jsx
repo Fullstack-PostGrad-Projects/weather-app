@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -7,16 +7,38 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import Figure from "react-bootstrap/Figure";
+import { useLocation } from "react-router-dom";
+import { getDailyForecast } from "../api";
+import Loading from "./Loading";
 
 const CityProfile = () => {
-  return (
+  const [cityData, setCityData] = useState([]);
+  let { state } = useLocation();
+  console.log(state.weatherObj, state.metaLocation);
+
+  const cityPrepData = async () => {
+    try {
+      const cityInfo = await getDailyForecast(state.metaLocation);
+      console.log(cityInfo.forecast, 'lets see')
+      setCityData(cityInfo.forecast)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  useEffect(() => {
+    cityPrepData();
+    console.log(cityData, "please no undefined");
+  }, [state.metaLocation]);
+
+  return cityData.length > 0 ? (
     <>
       <Figure>
         <Figure.Image
           width={171}
           height={180}
           alt="171x180"
-          src="holder.js/171x180"
+          src={`./images/${state.weatherObj.symbol}.png`}
         />
         <Figure.Caption>
           Nulla vitae elit libero, a pharetra augue mollis interdum.
@@ -73,6 +95,8 @@ const CityProfile = () => {
         </Accordion.Item>
       </Accordion>
     </>
+  ) : (
+    <Loading />
   );
 };
 

@@ -18,7 +18,7 @@ import {
 
 // const WeatherIcon = windIconDictionary[weatherObj.windDirString]
 
-function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
+function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon, metaLocation}) {
   const [readableTime, setReadableTime] = useState('')
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -48,6 +48,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
       event.preventDefault();
       console.log("I was clicked");
       setIsFavorite(!isFavorite);
+      console.log(metaLocation)
     };
     
     // const WeatherIcon = windIconDictionary[weatherObj.windDirString]
@@ -61,7 +62,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon}) {
           <BsStar onClick={handleOnClick} size="2rem" />
         )}
       <Card.Header>{readableTime}</Card.Header>
-      <Link to='/cityprofile'><Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} /></Link>
+      <Link to='/cityprofile' state={{weatherObj: weatherObj, metaLocation: metaLocation}}><Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} /></Link>
       <Card.Body>
         {/* <Card.Title>{weatherObj.city ? `${weatherObj.cityName}, ${weatherObj.country}` : weatherObj.country}</Card.Title> */}
         <Card.Title>{weatherObj.formatted}</Card.Title>

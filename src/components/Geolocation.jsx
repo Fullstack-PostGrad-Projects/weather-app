@@ -1,7 +1,11 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
-import { getLocationFromSearch, getWeatherFromCoordinates } from "../api";
+import {
+  getLocationFromSearch,
+  getWeatherFromCoordinates,
+  getMetadataFromCoordinates,
+} from "../api";
 import Loading from "./Loading";
 import Container from "react-bootstrap/Container";
 import WeatherSearchCard from "./WeatherSearchCard";
@@ -14,7 +18,8 @@ const Geolocation = ({ button, setButton }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [weatherImage, setWeatherImage] = useState("");
   const [searchWeatherResults, setSearchWeatherResults] = useState({});
-  const [WeatherIcon, setWeatherIcon] = useState('')
+  const [WeatherIcon, setWeatherIcon] = useState("");
+  const [metaLocation, setMetaLocation] = useState(0);
   // const [cityName, setCityName] = useState('')
 
   const windIconDictionary = {
@@ -54,14 +59,15 @@ const Geolocation = ({ button, setButton }) => {
     setSearchWeatherResults(test.current);
 
     setIsLoading(true);
-    setWeatherIcon(weatherIcon)
+    setWeatherIcon(weatherIcon);
 
     //getting the relevant weather data
-
-    /*
-        
-
-        */
+    const metaData = await getMetadataFromCoordinates(
+      searchLocation.features[0].properties.lon,
+      searchLocation.features[0].properties.lat
+    );
+    console.log(metaData, 'the location is somewhere')
+    setMetaLocation(metaData.id)
   };
 
   return (
@@ -85,6 +91,7 @@ const Geolocation = ({ button, setButton }) => {
             setIsLoading={setIsLoading}
             searchWeatherResults={searchWeatherResults}
             WeatherIcon={WeatherIcon}
+            metaLocation={metaLocation}
           />
         ) : (
           <></>
