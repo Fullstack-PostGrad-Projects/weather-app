@@ -59,7 +59,7 @@ export const getWeatherFromCoordinates = async (lon, lat) => {
 export const getDailyForecast = async (location) => {
   try {
     const response = await fetch(
-      `https://fnw-us.foreca.com/api/v1/forecast/daily/${location}&tempunit=F&windunit=MPH&periods=14`,
+      `https://fnw-us.foreca.com/api/v1/forecast/daily/${location}&tempunit=F&windunit=MPH&periods=14&dataset=full`,
       {
         headers: {
           "Content-Type": "application/json",
