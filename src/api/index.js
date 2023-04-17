@@ -18,6 +18,15 @@ export const getLocationFromSearch = async (searchTerm) => {
   }
 };
 
+// export const requestOptions = {
+//   method: 'GET',
+// };
+
+// fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=Mosco&apiKey=${process.env.REACT_APP_geoForwardAPI}`, requestOptions)
+//   .then(response => response.json())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
+
 export const getMetadataFromCoordinates = async (lon, lat) => {
   try {
     const response = await fetch(

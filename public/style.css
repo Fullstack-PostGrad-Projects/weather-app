@@ -117,3 +117,23 @@
 .dailyImage{
   height: .5rem;
 }
+
+
+.box{
+  border: #000 solid 2px;
+}
+.testbox{
+  border: #000 solid 2px;
+}
+
+.geoapify-autocomplete-input{
+  border: #000 solid 2px;
+
+}
+
+
+.geocoder-container{
+  width: 28rem;
+  /* height: 5rem; */
+  border: #000 2px solid;
+}

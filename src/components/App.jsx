@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
 import {MyLocation, Geolocation, Homepage, Header, WrongPage, Register, CityProfile, Profile} from "./";
+import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () =>{

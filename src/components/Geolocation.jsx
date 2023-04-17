@@ -9,6 +9,28 @@ import {
 import Loading from "./Loading";
 import Container from "react-bootstrap/Container";
 import WeatherSearchCard from "./WeatherSearchCard";
+import {
+  GeoapifyGeocoderAutocomplete,
+  GeoapifyContext,
+} from "@geoapify/react-geocoder-autocomplete";
+
+function GeoapifyForm({ onPlaceSelect, onSuggestionChange }) {
+  return (
+    <GeoapifyContext apiKey={process.env.REACT_APP_geoForwardAPI}>
+      <GeoapifyGeocoderAutocomplete
+        placeholder="Enter city here"
+        type="city"
+        lang="en"
+        limit={5}
+        placeSelect={onPlaceSelect}
+        suggestionsChange={onSuggestionChange}
+        // onUserInput={() => {
+        //   console.log('mooo');
+        // }}
+      />
+    </GeoapifyContext>
+  );
+}
 
 const Geolocation = ({ button, setButton }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,8 +58,10 @@ const Geolocation = ({ button, setButton }) => {
   // console.log(process.env.REACT_APP_forecaAPI, 'here')
   // console.log(process.env.REACT_APP_geoForwardAPI, 'why you working now')
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(event, "what I am now working withhh");
     console.log(searchTerm, "here I am");
 
     const searchLocation = await getLocationFromSearch(searchTerm);
@@ -66,25 +90,34 @@ const Geolocation = ({ button, setButton }) => {
       searchLocation.features[0].properties.lon,
       searchLocation.features[0].properties.lat
     );
-    console.log(metaData, 'the location is somewhere')
-    setMetaLocation(metaData.id)
+    console.log(metaData, "the location is somewhere");
+    setMetaLocation(metaData.id);
+  };
+
+  const handlePlaceSelect = (event) => {
+    console.log("Selected place:", event);
+    setSearchTerm(event.properties.formatted)
+  };
+
+  const handleSuggestionChange = (event) => {
+    console.log("Suggested places:", event);
   };
 
   return (
     <>
-      <Container>
+      <Container className="box">
         <h1>Hello World!</h1>
-        <Form className="d-flex" onSubmit={handleSubmit}>
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-            onChange={(event) => {
-              setSearchTerm(event.target.value);
-            }}
-          />
-          <Button variant="outline-info">Search</Button>
+        <Form className="d-flex me-2" onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Control
+              as={GeoapifyForm}
+              onPlaceSelect={handlePlaceSelect}
+              onSuggestionChange={handleSuggestionChange}
+            />
+          </Form.Group>
+          <Button variant="outline-info" type="submit">
+            Search
+          </Button>
         </Form>
         {isLoading ? (
           <WeatherSearchCard
