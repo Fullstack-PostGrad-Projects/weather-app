@@ -8,7 +8,7 @@ import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import Figure from "react-bootstrap/Figure";
 import { useLocation } from "react-router-dom";
-import { getDailyForecast } from "../api";
+import { getDailyForecast, getNowcastLong } from "../api";
 import Loading from "./Loading";
 import Image from "react-bootstrap/Image";
 import { BsSunrise, BsSunset } from "react-icons/bs";
@@ -16,7 +16,9 @@ import { BsSunrise, BsSunset } from "react-icons/bs";
 const CityProfile = () => {
   const [cityData, setCityData] = useState([]);
   const [readableTime, setReadableTime] = useState("");
-
+  const [nowcastLong, setNowcastLong] = useState('')
+  
+  
   let { state } = useLocation();
   console.log(state.weatherObj, state.metaLocation);
   const weekday = [
@@ -59,12 +61,28 @@ const CityProfile = () => {
     updateTime(state.weatherObj.time);
   }, [state.metaLocation]);
 
+
+
+  const handleOnClick = async () =>{
+    console.log('hi')
+    
+    try {
+      const hourlyWeatherObj = await getNowcastLong(state.metaLocation);
+      console.log(hourlyWeatherObj, "lets see");
+      // setNowcastLong(cityInfo.forecast);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return cityData.length > 0 ? (
     <>
       <Container className="cityProfileContainer">
         <span>
           <h1>{state.weatherObj.city}</h1>
           {readableTime}
+          <br></br>
+          <Button onClick={handleOnClick}>Hourly</Button>
         </span>
 
         {/* <Figure>

@@ -85,6 +85,27 @@ export const getDailyForecast = async (location) => {
 };
 
 
+export const getNowcastLong = async (location) => {
+  try {
+    const response = await fetch(
+      `https://fnw-us.foreca.com//api/v1/forecast/15minutely/${location}&tempunit=F&windunit=MPH&periods=8&dataset=full`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.REACT_APP_forecaAPI}`,
+        },
+      }
+    );
+    const result = await response.json();
+    console.log(result, "the weather api");
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
 // USER FUNCTIONS
 
 export const BASE = `https://obscure-harbor-35179.herokuapp.com/api`;
