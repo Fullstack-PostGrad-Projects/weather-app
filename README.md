@@ -3,6 +3,6 @@
 
 # Weathering with You
 
-[Project Deployment (work-in-progress)](https://weather-app-9f47-5tyvn0vx7-activites.vercel.app/)
+[Project Deployment (work-in-progress)](https://weather-app-9f47-ix79exo3e-activites.vercel.app/)
 
 This project features a combination of APIs from Geoapify and Foreca to bring users the ability to search their favorite cities and see current and extended weather for up to 2 weeks.
