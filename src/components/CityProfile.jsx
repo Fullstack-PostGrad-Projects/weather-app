@@ -32,6 +32,40 @@ const CityProfile = () => {
     "Saturday",
   ];
 
+  const symbolBank = {
+    'd000' : 'Clear',
+    'd100' : 'Mostly Clear',
+    'd200' : 'Partly Cloudy',
+    'd210' : 'Partly Cloudy and light rain',
+    'd220' : 'Partly Cloudy',
+    'd240' : 'Partly Cloudy',
+    'd211' : 'Partly Cloudy',
+    'd221' : 'Partly Cloudy',
+    'd212' : 'Partly Cloudy',
+    'd222' : 'Partly Cloudy',
+    'd300' : 'Cloudy',
+    'd310' : 'Cloudy and light rain',
+    'd320' : 'Cloudy',
+    'd340' : 'Cloudy',
+    'd311' : 'Cloudy',
+    'd321' : 'Cloudy',
+    'd312' : 'Cloudy',
+    'd322' : 'Cloudy',
+    'd400' : 'Overcast',
+    'd410' : 'Overcast and light rain',
+    'd420' : 'Overcast',
+    'd430' : 'Overcast',
+    'd440' : 'Overcast',
+    'd411' : 'Overcast',
+    'd421' : 'Overcast',
+    'd431' : 'Overcast',
+    'd412' : 'Overcast',
+    'd422' : 'Overcast',
+    'd432' : 'Overcast',
+    'd500' : 'Thin upper cloud',
+    'd600' : 'Fog',
+  }
+
   const cityPrepData = async () => {
     try {
       const cityInfo = await getDailyForecast(state.metaLocation);
@@ -133,7 +167,7 @@ const CityProfile = () => {
                     <Col className="weekIconCol">
                       <Row className="contentAccord">
                         <Col>
-                          <BsSunrise/> {day.sunrise} Hello
+                          <BsSunrise/> {day.sunrise} 
                           </Col>
                         <Col>2 of 3</Col>
                         <Col>3 of 3</Col>
