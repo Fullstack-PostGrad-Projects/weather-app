@@ -32,39 +32,39 @@ const CityProfile = () => {
     "Saturday",
   ];
 
-  const symbolBank = {
-    'd000' : 'Clear',
-    'd100' : 'Mostly Clear',
-    'd200' : 'Partly Cloudy',
-    'd210' : 'Partly Cloudy and light rain',
-    'd220' : 'Partly Cloudy',
-    'd240' : 'Partly Cloudy',
-    'd211' : 'Partly Cloudy',
-    'd221' : 'Partly Cloudy',
-    'd212' : 'Partly Cloudy',
-    'd222' : 'Partly Cloudy',
-    'd300' : 'Cloudy',
-    'd310' : 'Cloudy and light rain',
-    'd320' : 'Cloudy',
-    'd340' : 'Cloudy',
-    'd311' : 'Cloudy',
-    'd321' : 'Cloudy',
-    'd312' : 'Cloudy',
-    'd322' : 'Cloudy',
-    'd400' : 'Overcast',
-    'd410' : 'Overcast and light rain',
-    'd420' : 'Overcast',
-    'd430' : 'Overcast',
-    'd440' : 'Overcast',
-    'd411' : 'Overcast',
-    'd421' : 'Overcast',
-    'd431' : 'Overcast',
-    'd412' : 'Overcast',
-    'd422' : 'Overcast',
-    'd432' : 'Overcast',
-    'd500' : 'Thin upper cloud',
-    'd600' : 'Fog',
-  }
+  // const symbolBank = {
+  //   'd000' : 'Clear',
+  //   'd100' : 'Mostly clear',
+  //   'd200' : 'Partly cloudy',
+  //   'd210' : 'Partly cloudy and light rain',
+  //   'd220' : 'Partly cloudy and showers',
+  //   'd240' : 'Partly cloudy, thunderstorms with rain',
+  //   'd211' : 'Partly cloudy and light wet snow',
+  //   'd221' : 'Partly cloudy and wet snow showers',
+  //   'd212' : 'Partly cloudy and light snow',
+  //   'd222' : 'Partly cloudy and snow showers',
+  //   'd300' : 'Cloudy',
+  //   'd310' : 'Cloudy and light rain',
+  //   'd320' : 'Cloudy and showers',
+  //   'd340' : 'Cloudy, thunderstorms with rain',
+  //   'd311' : 'Cloudy and light wet snow',
+  //   'd321' : 'Cloudy and wet snow showers',
+  //   'd312' : 'Cloudy and light snow',
+  //   'd322' : 'Cloudy and snow showers',
+  //   'd400' : 'Overcast',
+  //   'd410' : 'Overcast and light rain',
+  //   'd420' : 'Overcast showers',
+  //   'd430' : 'Overcast and rain',
+  //   'd440' : 'Overcast, thunderstorms with rain',
+  //   'd411' : 'Overcast and light wet snow',
+  //   'd421' : 'Overcast and wet snow showers',
+  //   'd431' : 'Overcast and wet snow',
+  //   'd412' : 'Overcast and light snow',
+  //   'd422' : 'Overcast snow showers',
+  //   'd432' : 'Overcast and snow',
+  //   'd500' : 'Thin upper cloud',
+  //   'd600' : 'Fog',
+  // }
 
   const cityPrepData = async () => {
     try {
@@ -163,7 +163,10 @@ const CityProfile = () => {
                   <Row>
                     <Col className="weekIconCol">
                     <img  src={`./images/${day.symbol}.png`}/>
+                    <br/>
+                    {state.symbolBank[day.symbol]}
                     </Col>
+                    
                     <Col className="weekIconCol">
                       <Row className="contentAccord">
                         <Col>
