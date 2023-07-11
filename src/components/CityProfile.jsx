@@ -12,11 +12,12 @@ import { getDailyForecast, getNowcastLong } from "../api";
 import Loading from "./Loading";
 import Image from "react-bootstrap/Image";
 import { BsSunrise, BsSunset } from "react-icons/bs";
-
+import { IconContext } from "react-icons";
 const CityProfile = () => {
   const [cityData, setCityData] = useState([]);
   const [readableTime, setReadableTime] = useState("");
   const [nowcastLong, setNowcastLong] = useState('')
+  const [justTime, setJustTime] = useState('')
   
   
   let { state } = useLocation();
@@ -52,6 +53,7 @@ const CityProfile = () => {
         console.log(isoDate, "datteeeee");
         console.log(date, "hereeeeee");
         setReadableTime(date + " " + isoTime);
+        setJustTime(isoTime)
       }
     }
   };
@@ -98,65 +100,57 @@ const CityProfile = () => {
       </Figure> */}
       </Container>
       {cityData.map((day, idx) => {
-        const dayOfTheWeekIndex = new Date(day.date);
+        const dayOfTheWeekIndex = new Date(`${day.date} ${justTime}`);
         let dayOfTheWeek = weekday[dayOfTheWeekIndex.getDay()];
         // console.log(cityData, 'should be populated')
         let dayNumber = dayOfTheWeekIndex.getDate();
         let month = dayOfTheWeekIndex.toLocaleString("default", { month: "short" });
         let toShow = month + " " + dayNumber;
+        // console.log(toShow, 'here the dates are wrong')
 
         return (
-          <Accordion key={idx} defaultActiveKey={idx === 1 ? idx : null}>
+          <Accordion key={idx} defaultActiveKey={idx === 0 ? idx : null}>
             <Accordion.Item eventKey={idx}>
               <Accordion.Header>
                 <Container>
                   <Row>
                     <Col>{dayOfTheWeek} {toShow}</Col>
                     <Col>
+                      <img className="miniIcon" src={`./images/${day.symbol}.png`} />
                       {day.maxTemp}°F/{day.minTemp}°F
                     </Col>
-                    <Col>3 of 3</Col>
+                    <Col>Precipitation Chance: {day.precipProb}%</Col>
                   </Row>
                 </Container>
               </Accordion.Header>
               <Accordion.Body>
                 <Container fluid>
+                <IconContext.Provider value={{ className: "forecastIcons", size: 35 }}>
                   <Row>
-                    <Col>
-                      <Card style={{ width: "18rem" }}>
-                        <Card.Img
-                          variant="top"
-                          src={`./images/${day.symbol}.png`}
-                        />
-                        <Card.Body className="testMe">
-                          <Card.Title>Card Title</Card.Title>
-                          <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
-                          </Card.Text>
-                          <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                      </Card>
+                    <Col className="weekIconCol">
+                    <img  src={`./images/${day.symbol}.png`}/>
                     </Col>
-                    <Col>
-                      <Row>
+                    <Col className="weekIconCol">
+                      <Row className="contentAccord">
                         <Col>
-                          <BsSunrise /> {day.sunrise}{" "}
-                        </Col>
-                        <Col>
-                          <BsSunset /> {day.sunset}
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col>2 of 3</Col>
-                        <Col>3 of 3</Col>
-                      </Row>
-                      <Row>
+                          <BsSunrise/> {day.sunrise} Hello
+                          </Col>
                         <Col>2 of 3</Col>
                         <Col>3 of 3</Col>
                       </Row>
                     </Col>
-                  </Row>
+                    <Col className="weekIconCol">
+                      <Row>
+                        
+                        <Col>
+                          <BsSunset/> {day.sunset}{" "}
+                          </Col>
+                        <Col>2 of 3</Col>
+                        <Col>3 of 3</Col>
+                      </Row>
+                    </Col>
+                    </Row>
+                    </IconContext.Provider>
                 </Container>
               </Accordion.Body>
             </Accordion.Item>
