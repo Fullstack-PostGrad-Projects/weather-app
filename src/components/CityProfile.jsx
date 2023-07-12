@@ -132,7 +132,6 @@ const CityProfile = () => {
           {state.weatherObj.temperature}
         </Figure.Caption>
       </Figure> */}
-      </Container>
       {cityData.map((day, idx) => {
         const dayOfTheWeekIndex = new Date(`${day.date} ${justTime}`);
         let dayOfTheWeek = weekday[dayOfTheWeekIndex.getDay()];
@@ -194,6 +193,8 @@ const CityProfile = () => {
           </Accordion>
         );
       })}
+      </Container>
+
     </>
   ) : (
     <Loading />
