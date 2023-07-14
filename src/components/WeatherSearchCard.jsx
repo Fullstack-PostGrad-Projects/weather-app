@@ -117,7 +117,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon, met
       </ListGroup>
       <Card.Body>
         <Card.Link href="#">7 Days</Card.Link>
-        <Card.Link href="#">14 Days</Card.Link>
+        <Link to='/cityprofile' state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}>14 Days</Link>
       </Card.Body>
     </Card>
     </div>

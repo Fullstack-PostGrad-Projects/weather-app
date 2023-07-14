@@ -11,7 +11,8 @@ import { useLocation } from "react-router-dom";
 import { getDailyForecast, getNowcastLong } from "../api";
 import Loading from "./Loading";
 import Image from "react-bootstrap/Image";
-import { BsSunrise, BsSunset } from "react-icons/bs";
+import { BsSunrise, BsSunset, BsWind, BsSun } from "react-icons/bs";
+// import { PiWindDuotone } from "react-icons/pi";
 import { IconContext } from "react-icons";
 const CityProfile = () => {
   const [cityData, setCityData] = useState([]);
@@ -31,7 +32,7 @@ const CityProfile = () => {
     "Friday",
     "Saturday",
   ];
-
+  
   // const symbolBank = {
   //   'd000' : 'Clear',
   //   'd100' : 'Mostly clear',
@@ -65,6 +66,42 @@ const CityProfile = () => {
   //   'd500' : 'Thin upper cloud',
   //   'd600' : 'Fog',
   // }
+
+const windDirection = (deg) =>{
+  if (deg >= 348.75 && deg <= 360 && deg < 11.25) {
+    return 'N'
+  } else if ( deg >= 11.25 && deg < 33.75){
+    return 'NNE'
+  } else if ( deg >= 33.75 && deg < 56.25){
+    return 'NE'
+  } else if ( deg >= 56.25 && deg < 78.75){
+    return 'ENE'
+  } else if ( deg >= 78.75 && deg < 101.25){
+    return 'E'
+  } else if ( deg >= 101.25 && deg < 123.75){
+    return 'ESE'
+  } else if ( deg >= 123.75 && deg < 146.25){
+    return 'SE'
+  } else if ( deg >= 146.25 && deg < 168.75){
+    return 'SSE'
+  } else if ( deg >= 168.75 && deg < 191.25){
+    return 'S'
+  } else if ( deg >= 191.25 && deg < 213.75){
+    return 'SSW'
+  } else if ( deg >= 213.75 && deg < 236.25){
+    return 'SW'
+  } else if ( deg >= 236.25 && deg < 258.75){
+    return 'WSW'
+  } else if ( deg >= 258.75 && deg < 281.25){
+    return 'W'
+  } else if ( deg >= 281.25 && deg < 303.75){
+    return 'WNW'
+  } else if ( deg >= 303.75 && deg < 326.25){
+    return 'NW'
+  } else if ( deg >= 326.25 && deg < 348.75){
+    return 'NNW'
+  } 
+}
 
   const cityPrepData = async () => {
     try {
@@ -139,6 +176,7 @@ const CityProfile = () => {
         let dayNumber = dayOfTheWeekIndex.getDate();
         let month = dayOfTheWeekIndex.toLocaleString("default", { month: "short" });
         let toShow = month + " " + dayNumber;
+        let windDirectionAbbr = windDirection(day.windDir)
         // console.log(toShow, 'here the dates are wrong')
 
         return (
@@ -159,7 +197,7 @@ const CityProfile = () => {
               <Accordion.Body>
                 <Container fluid>
                 <IconContext.Provider value={{ className: "forecastIcons", size: 35 }}>
-                  <Row>
+                  <Row >
                     <Col className="weekIconCol">
                     <img  src={`./images/${day.symbol}.png`}/>
                     <br/>
@@ -171,18 +209,16 @@ const CityProfile = () => {
                         <Col>
                           <BsSunrise/> {day.sunrise} 
                           </Col>
-                        <Col>2 of 3</Col>
-                        <Col>3 of 3</Col>
+                        <Col><BsSunset/> {day.sunset}</Col>
                       </Row>
                     </Col>
                     <Col className="weekIconCol">
                       <Row>
                         
                         <Col>
-                          <BsSunset/> {day.sunset}{" "}
+                        <BsWind/><br/> {day.maxWindSpeed}mph {windDirectionAbbr}
                           </Col>
-                        <Col>2 of 3</Col>
-                        <Col>3 of 3</Col>
+                        <Col><BsSun/><br/> UV Index: {day.uvIndex}</Col>
                       </Row>
                     </Col>
                     </Row>

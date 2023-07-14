@@ -169,4 +169,5 @@ justify-content: center;
 .testBox{
   border: #000 solid 2px;
   display: flex;
+  justify-content: center;
 }
