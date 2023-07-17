@@ -96,7 +96,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon, met
           <BsStar onClick={handleOnClick} size="2rem" />
         )}
       <Card.Header>{readableTime}</Card.Header>
-      <Link to='/cityprofile' state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}><Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} /></Link>
+      <Link to={`/cityprofile`} state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}><Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} /></Link>
       <Card.Body>
         {/* <Card.Title>{weatherObj.city ? `${weatherObj.cityName}, ${weatherObj.country}` : weatherObj.country}</Card.Title> */}
         <Card.Title>{weatherObj.formatted}</Card.Title>
@@ -117,7 +117,7 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon, met
       </ListGroup>
       <Card.Body>
         <Card.Link href="#">7 Days</Card.Link>
-        <Link to='/cityprofile' state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}>14 Days</Link>
+        <Link to={`/cityprofile/${searchWeatherResults.city.toLowerCase()}`} state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}>14 Days</Link>
       </Card.Body>
     </Card>
     </div>

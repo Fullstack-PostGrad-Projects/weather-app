@@ -157,7 +157,7 @@ const windDirection = (deg) =>{
           <br></br>
           <Button onClick={handleOnClick}>Hourly</Button>
         </span>
-
+        {/* <img src="/public/images/d100.png" alt="Current weather top of the key"/> */}
         {/* <Figure>
         <Figure.Image
           width={171}
@@ -177,7 +177,7 @@ const windDirection = (deg) =>{
         let month = dayOfTheWeekIndex.toLocaleString("default", { month: "short" });
         let toShow = month + " " + dayNumber;
         let windDirectionAbbr = windDirection(day.windDir)
-        // console.log(toShow, 'here the dates are wrong')
+        // console.log(`./images/${day.symbol}.png`)
 
         return (
           <Accordion key={idx} defaultActiveKey={idx === 0 ? idx : null}>
@@ -187,7 +187,7 @@ const windDirection = (deg) =>{
                   <Row>
                     <Col>{dayOfTheWeek} {toShow}</Col>
                     <Col>
-                      <img className="miniIcon" src={`./images/${day.symbol}.png`} />
+                      <img className="miniIcon" src={require(`/public/images/${day.symbol}.png`)} alt="Current weather"/>
                       {day.maxTemp}°F/{day.minTemp}°F
                     </Col>
                     <Col>Precipitation Chance: {day.precipProb}%</Col>
@@ -199,7 +199,7 @@ const windDirection = (deg) =>{
                 <IconContext.Provider value={{ className: "forecastIcons", size: 35 }}>
                   <Row >
                     <Col className="weekIconCol">
-                    <img  src={`./images/${day.symbol}.png`}/>
+                    <img src={require(`/public/images/${day.symbol}.png`)}/>
                     <br/>
                     {state.symbolBank[day.symbol]}
                     </Col>
@@ -211,6 +211,7 @@ const windDirection = (deg) =>{
                           </Col>
                         <Col><BsSunset/> {day.sunset}</Col>
                       </Row>
+                      
                     </Col>
                     <Col className="weekIconCol">
                       <Row>
