@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-
+import { Navigate, useNavigate } from "react-router-dom";
 const Register = () => {
   const [show, setShow] = useState(false);
   const [modalMessage, setModalMessage] = useState("Not enough characters");
@@ -42,7 +42,7 @@ const Register = () => {
     "?",
     "/"
   ];
-
+  const navigate = useNavigate()
   const passwordNumChecker = (password) => {
     for (let num of passNumber) {
       if (password.includes(num)) {
@@ -91,6 +91,8 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     handlePassword(event, event.currentTarget.formBasicPassword.value);
+
+    navigate('/comingsoon')
   };
   return (
     <>
