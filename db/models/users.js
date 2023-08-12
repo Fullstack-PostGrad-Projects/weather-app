@@ -35,7 +35,11 @@ const grabUserByUsername = async ({ username }) => {
     `,
       [username]
     );
-    return user;
+    if (user) {
+      return user;
+    } else {
+      return;
+    }
   } catch (error) {
     console.error("error in grabUserByUsername", error);
   }
@@ -107,14 +111,16 @@ const grabAllUsers = async () => {
 async function getUser({ username, password }) {
   try {
     const checkUser = await grabUserByUsername({ username });
-    const hashedPassword = checkUser.password;
-    const isValid = await bcrypt.compare(password, hashedPassword);
-    if (isValid) {
-      const finalUser = await grabUserById(checkUser.id);
-      return finalUser;
+    if (checkUser) {
+      const hashedPassword = checkUser.password;
+      const isValid = await bcrypt.compare(password, hashedPassword);
+      if (isValid) {
+        let finalUser = await grabUserById(checkUser.id);
+        return finalUser;
+      } else {
+        return;
+      }
     }
-
-    return finalUser;
   } catch (error) {
     console.error(error); // Log the actual error message
     throw error;

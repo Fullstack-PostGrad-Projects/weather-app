@@ -7,7 +7,7 @@ import { loginUser } from "../api";
 import { storeToken, storeUserData } from "../auth";
 import Toast from "react-bootstrap/Toast";
 const Login = ({ setToken, token }) => {
-  const [username, setUsername] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
@@ -18,10 +18,12 @@ const Login = ({ setToken, token }) => {
     const password = event.currentTarget.floatingInputPassword.value;
     const username = event.currentTarget.floatingInputEmail.value;
     const user = await loginUser(username, password);
-    if (user) {
+    console.log("user", user.message);
+    if (user.message === "Username or password is incorrect") {
+      setShowToast(true);
+    } else {
       storeToken(user.token);
       storeUserData(user.user);
-    } else {
     }
     console.log("user should be", user);
     // console.log("I was clicked");
@@ -57,6 +59,16 @@ const Login = ({ setToken, token }) => {
           </Button>
         </div>
       </Form>
+      <Toast show={showToast} onClose={() => setShowToast(false)}>
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">Sign Up!</strong>
+          <small>{Date}</small>
+        </Toast.Header>
+        <Toast.Body>
+          You don't have an account..Please click sign up!.
+        </Toast.Body>
+      </Toast>
       <div className="loginSignUpSeparator">
         <span>or</span>
       </div>
