@@ -33,13 +33,13 @@ const grabUserByUsername = async ({ username }) => {
       FROM users 
       WHERE id = $1
     `,
-    [username]
+      [username]
     );
     return user;
   } catch (error) {}
 };
 
-const grabUserById = async ({ userId }) => {
+const grabUserById = async (userId) => {
   try {
     const {
       rows: [user],
@@ -53,7 +53,7 @@ const grabUserById = async ({ userId }) => {
     );
     return user;
   } catch (error) {
-    console.error("error in getUserById");
+    console.error("error in grabUserById");
     throw error;
   }
 };
@@ -102,11 +102,68 @@ const grabAllUsers = async () => {
     throw error;
   }
 };
+async function getUser({ username, password }) {
+  try {
+    const checkUser = await grabUserByUsername(username);
+    const hashedPassword = checkUser.password;
+    const isValid = await bcrypt.compare(password, hashedPassword);
+
+    if (isValid) {
+      const {
+        rows: [user],
+      } = await client.query(
+        `
+      SELECT id, username
+      FROM users
+      WHERE username=$1 AND password=$2;
+      `,
+        [username, hashedPassword]
+      );
+
+      return { user, hashedPassword };
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error); // Log the actual error message
+    throw error;
+  }
+}
+
+// async function getUser({ username, password }) {
+//   try {
+//     grabUserById;
+//     const checkUser = await grabUserByUsername(username);
+//     const hashedPassword = checkUser.password;
+//     const isValid = await bcrypt.compare(password, hashedPassword);
+
+//     if (isValid) {
+//       const {
+//         rows: [user],
+//       } = await client.query(
+//         `
+//       SELECT id, username
+//       FROM users
+//       WHERE username=$1 AND password=$2;
+//       `,
+//         [username, hashedPassword]
+//       );
+
+//       return { user, hashedPassword };
+//     } else {
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error;
+//     throw error;
+//   }
+// }
 
 module.exports = {
   createUser,
   grabUserById,
   updateUser,
   grabAllUsers,
-  grabUserByUsername
+  grabUserByUsername,
+  getUser,
 };

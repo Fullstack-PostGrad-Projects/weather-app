@@ -1,9 +1,7 @@
 const apiRouter = require("express").Router();
 const { JWT_SECRET } = process.env;
 const jwt = require("jsonwebtoken");
-const { getUserById } = require("../db");
-const userRouter = require("./users");
-const starredRouter = require("./starred");
+const { grabUserById } = require("../db");
 
 apiRouter.use(async (req, res, next) => {
   const prefix = "Bearer ";
@@ -18,7 +16,7 @@ apiRouter.use(async (req, res, next) => {
       const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
-        req.user = await getUserById(id);
+        req.user = await grabUserById(id);
 
         next();
       }
@@ -39,6 +37,9 @@ apiRouter.get("/", (req, res, next) => {
   });
 });
 
+const userRouter = require("./users");
+apiRouter.use("/users", userRouter);
+
 apiRouter.get("/health", (req, res, next) => {
   res.send({
     healthy: true,
@@ -46,7 +47,11 @@ apiRouter.get("/health", (req, res, next) => {
 });
 
 //our routes
-apiRouter.use("/users", userRouter);
+
+//User Router
+
+//Starred Router
+const starredRouter = require("./starred");
 apiRouter.use("/starred", starredRouter);
 
 apiRouter.use((req, res, next) => {
@@ -70,4 +75,4 @@ apiRouter.use((error, req, res, next) => {
     error: error.error,
   });
 });
-module.exports = apiRouter
+module.exports = apiRouter;
