@@ -9,6 +9,7 @@
     "start-dev": "NODE_ENV='development' react-scripts start",
     "server:dev": "nodemon index.js",
     "client:build": "react-scripts build",
+    "server:live": "concurrently \"npm run start-dev\" \"npm run server:dev\"",
     "db:build": "node ./db/seedData"
   },
   "keywords": [],

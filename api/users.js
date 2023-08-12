@@ -23,6 +23,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//Post--register
 router.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
   try {
@@ -51,64 +52,7 @@ router.post("/register", async (req, res, next) => {
 });
 
 //Post --Login
-// router.post("/login", async (req, res, next) => {
-//   const { username, password } = req.body;
-//   if (!username || !password) {
-//     next({
-//       message: "Please supply both an username and password",
-//     });
-//     const user = await grabUserByUsername(username);
-//     const hashedPassword = user.password;
-//     const isValid = await bcrypt.compare(password, hashedPassword);
-//     try {
-//       if (isValid) {
-//         if (user && isValid) {
-//           const token = jwt.sign({ id: user.id, email }, JWT_SECRET, {
-//             expiresIn: "1w",
-//           });
-//           res.send({ message: "You're Logged In!", user, token });
-//         } else {
-//           next({ message: "username or password is incorrect" });
-//         }
-//       }
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// });
 
-// Post -- Login
-// router.post("/login", async (req, res, next) => {
-//   const { username, password } = req.body;
-
-//   try {
-//     if (!username || !password) {
-//       next({
-//         message: "Please supply both a username and password",
-//       });
-//       return; // Return to prevent the code below from executing
-//     }
-//     console.log("password is", password);
-//     const user = await getUser({ username, password });
-//     console.log("user after getUser", user);
-
-//     const isValid = await bcrypt.compare(password, hashedPassword);
-//     if (!user) {
-//       next({ message: "Username or password is incorrect" });
-//       return; // Return to prevent the code below from executing
-//     }
-//     if (isValid) {
-//       const token = jwt.sign({ id: user.id, username }, JWT_SECRET, {
-//         expiresIn: "1w",
-//       });
-//       res.send({ message: "You're Logged In!", user, token });
-//     } else {
-//       next({ message: "Username or password is incorrect" });
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -119,17 +63,15 @@ router.post("/login", async (req, res, next) => {
       });
       return; // Return to prevent the code below from executing
     }
-
+    console.log("in login post");
     const user = await getUser({ username, password }); // Assuming getUser function works correctly
-
+    console.log("after getUser", user);
     if (!user) {
       next({ message: "Username or password is incorrect" });
       return; // Return to prevent the code below from executing
     }
 
-    const isValid = await bcrypt.compare(password, user.password); // Compare the hashed password from the database with the provided password
-
-    if (isValid) {
+    if (user) {
       const token = jwt.sign({ id: user.id, username }, JWT_SECRET, {
         expiresIn: "1w",
       });

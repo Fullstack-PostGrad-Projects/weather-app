@@ -29,14 +29,16 @@ const grabUserByUsername = async ({ username }) => {
       rows: [user],
     } = await client.query(
       `
-      SELECT name as username
+      SELECT  username, id, password
       FROM users 
-      WHERE id = $1
+      WHERE username = $1
     `,
       [username]
     );
     return user;
-  } catch (error) {}
+  } catch (error) {
+    console.error("error in grabUserByUsername", error);
+  }
 };
 
 const grabUserById = async (userId) => {
@@ -104,60 +106,20 @@ const grabAllUsers = async () => {
 };
 async function getUser({ username, password }) {
   try {
-    const checkUser = await grabUserByUsername(username);
+    const checkUser = await grabUserByUsername({ username });
     const hashedPassword = checkUser.password;
     const isValid = await bcrypt.compare(password, hashedPassword);
-
     if (isValid) {
-      const {
-        rows: [user],
-      } = await client.query(
-        `
-      SELECT id, username
-      FROM users
-      WHERE username=$1 AND password=$2;
-      `,
-        [username, hashedPassword]
-      );
-
-      return { user, hashedPassword };
-    } else {
-      return null;
+      const finalUser = await grabUserById(checkUser.id);
+      return finalUser;
     }
+
+    return finalUser;
   } catch (error) {
     console.error(error); // Log the actual error message
     throw error;
   }
 }
-
-// async function getUser({ username, password }) {
-//   try {
-//     grabUserById;
-//     const checkUser = await grabUserByUsername(username);
-//     const hashedPassword = checkUser.password;
-//     const isValid = await bcrypt.compare(password, hashedPassword);
-
-//     if (isValid) {
-//       const {
-//         rows: [user],
-//       } = await client.query(
-//         `
-//       SELECT id, username
-//       FROM users
-//       WHERE username=$1 AND password=$2;
-//       `,
-//         [username, hashedPassword]
-//       );
-
-//       return { user, hashedPassword };
-//     } else {
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error;
-//     throw error;
-//   }
-// }
 
 module.exports = {
   createUser,

@@ -84,7 +84,6 @@ export const getDailyForecast = async (location) => {
   }
 };
 
-
 export const getNowcastLong = async (location) => {
   try {
     const response = await fetch(
@@ -104,21 +103,20 @@ export const getNowcastLong = async (location) => {
   }
 };
 
-
-
 // USER FUNCTIONS
 
-export const BASE = `https://obscure-harbor-35179.herokuapp.com/api`;
+//export const BASE = `https://obscure-harbor-35179.herokuapp.com/api`;
+export const BASE = `http://localhost:4000/api/`;
 
-export async function createUser(name, password) {
+export async function createUser(username, password) {
   try {
-    const response = await fetch(`${BASE}/users/register`, {
+    const response = await fetch(`${BASE}users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
+        username: username,
         password: password,
       }),
     });
@@ -140,15 +138,15 @@ export const getUser = async (id, token) => {
   return result;
 };
 
-export async function loginUser(email, password) {
+export async function loginUser(username, password) {
   try {
-    const response = await fetch(`${BASE}/users/login`, {
+    const response = await fetch(`${BASE}users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email,
+        username,
         password,
       }),
     });
