@@ -171,3 +171,9 @@ justify-content: center;
   display: flex;
   justify-content: center;
 }
+
+
+.dayOptions{
+  display: flex;
+  justify-content: space-between;
+}

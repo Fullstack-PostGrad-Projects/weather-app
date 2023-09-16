@@ -12,6 +12,10 @@ export {default as Profile} from './Profile'
 export {default as CityProfile} from './CityProfile'
 export {default as ComingSoon} from './ComingSoon'
 export {default as Hourly} from './Hourly'
+export {default as CityProfile7Day} from './CityProfile7Day'
+
+
+
 
 
 

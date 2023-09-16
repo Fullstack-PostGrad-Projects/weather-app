@@ -146,8 +146,8 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon, met
         {/* <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
       </ListGroup>
-      <Card.Body>
-        <Card.Link href="#">7 Days</Card.Link>
+      <Card.Body className="dayOptions">
+        <Link to={`/CityProfile7Day/${searchWeatherResults.city.toLowerCase()}`} state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}>7 Days</Link>
         <Link to={`/cityprofile/${searchWeatherResults.city.toLowerCase()}`} state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}>14 Days</Link>
       </Card.Body>
     </Card>
