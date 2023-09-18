@@ -120,15 +120,15 @@ function WeatherSearchCard({searchWeatherResults, setIsLoading, WeatherIcon, met
 
   return ( 
     <div className="weatherContainer">
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '25rem' }}>
     {isFavorite ? (
-          <BsStarFill onClick={handleOnClick} size="2rem" />
+          <BsStarFill onClick={handleOnClick} size="4rem" />
         ) : (
-          <BsStar onClick={handleOnClick} size="2rem" />
+          <BsStar onClick={handleOnClick} size="4rem" />
         )}
       <Card.Header>{readableTime}</Card.Header>
       <Link to={`/cityprofile`} state={{weatherObj: weatherObj, metaLocation: metaLocation, symbolBank: symbolBank}}><Card.Img variant="top" src={`./images/${weatherObj.symbol}.png`} /></Link>
-      <Card.Body>
+      <Card.Body className="cardBody">
         {/* <Card.Title>{weatherObj.city ? `${weatherObj.cityName}, ${weatherObj.country}` : weatherObj.country}</Card.Title> */}
         <Card.Title>{weatherObj.formatted}</Card.Title>
         <Card.Text className="tempLine tempBlock">

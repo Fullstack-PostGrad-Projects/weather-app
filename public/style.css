@@ -1,4 +1,13 @@
 
+
+#app {
+  background-color: white;
+}
+.box{
+  background-color: teal;
+  height: 100%;
+  width: 100vh;
+}
 /* 404 Page */
 
 #mainBody {
@@ -85,6 +94,9 @@
 .tempBlock{
   display: flex;
   justify-content: space-between;
+}
+.cardBody{
+  height: 10rem;
 }
 
 #bigText{
