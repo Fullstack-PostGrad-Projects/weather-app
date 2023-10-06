@@ -103,7 +103,9 @@
   font-size: 1.2rem;
 }
 
-
+.signuplink{
+  text-decoration: none;
+}
 
 
 .loginSignUpSeparator {
