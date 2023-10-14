@@ -31,6 +31,14 @@ const Login = ({ setToken, token }) => {
     // console.log(event.target[1].value);
   };
 
+  const SignUpClick = async (event) => {
+    event.preventDefault();
+    const password = event.currentTarget.floatingInputPassword.value;
+    const username = event.currentTarget.floatingInputEmail.value;
+    console.log("password", password);
+    console.log("username", username);
+  };
+
   return (
     <Container>
       <Form onSubmit={handleSubmit} id="formLayout">
@@ -73,7 +81,7 @@ const Login = ({ setToken, token }) => {
         <span>or</span>
       </div>
       <div className="d-grid gap-2">
-        <Button variant="outline-primary" size="lg">
+        <Button onClick={SignUpClick()} variant="outline-primary" size="lg">
           Sign up
         </Button>
       </div>
