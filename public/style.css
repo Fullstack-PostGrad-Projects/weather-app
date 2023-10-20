@@ -1,4 +1,13 @@
 
+
+#app {
+  background-color: white;
+}
+.box{
+  background-color: teal;
+  height: 100%;
+  width: 100vh;
+}
 /* 404 Page */
 
 #mainBody {
@@ -86,12 +95,17 @@
   display: flex;
   justify-content: space-between;
 }
+.cardBody{
+  height: 10rem;
+}
 
 #bigText{
   font-size: 1.2rem;
 }
 
-
+.signuplink{
+  text-decoration: none;
+}
 
 
 .loginSignUpSeparator {
@@ -170,4 +184,10 @@ justify-content: center;
   border: #000 solid 2px;
   display: flex;
   justify-content: center;
+}
+
+
+.dayOptions{
+  display: flex;
+  justify-content: space-between;
 }

@@ -14,14 +14,20 @@ import Image from "react-bootstrap/Image";
 import { BsSunrise, BsSunset, BsWind, BsSun } from "react-icons/bs";
 // import { PiWindDuotone } from "react-icons/pi";
 import { IconContext } from "react-icons";
+import Hourly from "./Hourly";
+
 const CityProfile = () => {
+  let { state } = useLocation();
+
   const [cityData, setCityData] = useState([]);
   const [readableTime, setReadableTime] = useState("");
   const [nowcastLong, setNowcastLong] = useState('')
   const [justTime, setJustTime] = useState('')
+  const [cityLocation, setCityLocation] = useState(state.metaLocation)
+  const [testSwitch, setTestSwitch] = useState(false)
+  const [hourlyOrWeekly, setHourlyOrWeekly] = useState({true: 'Hourly', false: 'Weekly'})
+
   
-  
-  let { state } = useLocation();
   console.log(state.weatherObj, state.metaLocation);
   const weekday = [
     "Sunday",
@@ -143,6 +149,7 @@ const windDirection = (deg) =>{
       const hourlyWeatherObj = await getNowcastLong(state.metaLocation);
       console.log(hourlyWeatherObj, "lets see");
       // setNowcastLong(cityInfo.forecast);
+      setTestSwitch(!testSwitch)
     } catch (error) {
       console.error(error);
     }
@@ -155,7 +162,7 @@ const windDirection = (deg) =>{
           <h1>{state.weatherObj.city}</h1>
           {readableTime}
           <br></br>
-          <Button onClick={handleOnClick}>Hourly</Button>
+          <Button onClick={handleOnClick}>{hourlyOrWeekly[testSwitch]}</Button>
         </span>
         {/* <img src="/public/images/d100.png" alt="Current weather top of the key"/> */}
         {/* <Figure>
@@ -169,6 +176,7 @@ const windDirection = (deg) =>{
           {state.weatherObj.temperature}
         </Figure.Caption>
       </Figure> */}
+      {testSwitch ? 'hi' : 'yo'}
       {cityData.map((day, idx) => {
         const dayOfTheWeekIndex = new Date(`${day.date} ${justTime}`);
         let dayOfTheWeek = weekday[dayOfTheWeekIndex.getDay()];

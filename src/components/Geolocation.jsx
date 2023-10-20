@@ -105,12 +105,11 @@ const Geolocation = ({ button, setButton }) => {
 
   return (
     <>
-      <Container className="box">
+      <Container className="box" fluid='xxl'>
         <h1>Search a City</h1>
         <Form className="d-flex me-2" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control
-              as={GeoapifyForm}
+            <GeoapifyForm
               onPlaceSelect={handlePlaceSelect}
               onSuggestionChange={handleSuggestionChange}
             />

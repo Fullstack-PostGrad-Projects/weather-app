@@ -23,6 +23,9 @@ function Homepage() {
     // console.log(event.target[0].value);
     // console.log(event.target[1].value);
   };
+  const handleOnClick = () =>{
+
+  }
 
   return (
     <Container>
@@ -56,8 +59,8 @@ function Homepage() {
           <span>or</span>
         </div>
         <div className="d-grid gap-2">
-          <Button variant="outline-primary" size="lg">
-            Sign up
+          <Button variant="outline-primary" size="lg"  onClick={handleOnClick}>
+          <Link to='/register' className="signuplink"> Sign up</Link>
           </Button>
         </div>
       </Container>
