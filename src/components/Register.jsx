@@ -40,9 +40,9 @@ const Register = () => {
     ">",
     ".",
     "?",
-    "/"
+    "/",
   ];
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const passwordNumChecker = (password) => {
     for (let num of passNumber) {
       if (password.includes(num)) {
@@ -92,7 +92,7 @@ const Register = () => {
     event.preventDefault();
     handlePassword(event, event.currentTarget.formBasicPassword.value);
 
-    navigate('/comingsoon')
+    navigate("/comingsoon");
   };
   return (
     <>

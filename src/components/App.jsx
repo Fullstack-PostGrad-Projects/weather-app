@@ -1,6 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import {  Routes, Route } from 'react-router-dom';
-import {MyLocation, Geolocation, Homepage, Header, WrongPage, Register, CityProfile, Profile, ComingSoon, CityProfile7Day} from "./";
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
@@ -13,7 +10,7 @@ import {
   CityProfile,
   Profile,
   ComingSoon,
-  Login,
+  CityProfile7Day,
 } from "./";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 
@@ -24,30 +21,18 @@ const App = () => {
 
   return (
     <>
-    <Routes>
-        <Route exact path='/' element={<Header />}>
-        <Route index element={<Geolocation button={button} setButton={setButton}/>}/>
-        <Route path='/login' element={<Homepage />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/cityprofile/' element={<CityProfile />} />
-        <Route path='/cityprofile/:city' element={<CityProfile />} />
-        <Route path='/cityprofile7day/:city' element={<CityProfile7Day />} />
-
-        <Route path='/comingsoon' element={<ComingSoon/>}/>
-        <Route path='/profile' element={<Profile />} />
-
-
-
       <Routes>
         <Route exact path="/" element={<Header />}>
           <Route
             index
             element={<Geolocation button={button} setButton={setButton} />}
           />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Homepage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cityprofile/" element={<CityProfile />} />
           <Route path="/cityprofile/:city" element={<CityProfile />} />
+          <Route path="/cityprofile7day/:city" element={<CityProfile7Day />} />
+
           <Route path="/comingsoon" element={<ComingSoon />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
@@ -56,5 +41,4 @@ const App = () => {
     </>
   );
 };
-
 export default App;

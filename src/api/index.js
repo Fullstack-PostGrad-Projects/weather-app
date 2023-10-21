@@ -103,20 +103,38 @@ export const getNowcastLong = async (location) => {
   }
 };
 
+export const getSevenDayForcast = async (location) => {
+  try {
+    const response = await fetch(
+      `https://fnw-us.foreca.com//api/v1/forecast/hourly/${location}&tempunit=F&windunit=MPH&periods=168&dataset=full`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.REACT_APP_forecaAPI}`,
+        },
+      }
+    );
+    const result = await response.json();
+    console.log(result, "the weather api");
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // USER FUNCTIONS
 
-//export const BASE = `https://obscure-harbor-35179.herokuapp.com/api`;
-export const BASE = `http://localhost:4000/api/`;
+export const BASE = `https://obscure-harbor-35179.herokuapp.com/api`;
 
-export async function createUser(username, password) {
+export async function createUser(name, password) {
   try {
-    const response = await fetch(`${BASE}users/register`, {
+    const response = await fetch(`${BASE}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
+        name: name,
         password: password,
       }),
     });
@@ -138,15 +156,15 @@ export const getUser = async (id, token) => {
   return result;
 };
 
-export async function loginUser(username, password) {
+export async function loginUser(email, password) {
   try {
-    const response = await fetch(`${BASE}users/login`, {
+    const response = await fetch(`${BASE}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username,
+        email,
         password,
       }),
     });
