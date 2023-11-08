@@ -107,7 +107,15 @@
   text-decoration: none;
 }
 
+/* .searchBox{
+  border: #000 solid 2px;
+  width: 100%;
+} */
 
+.citySearchContainer{
+  border: blue solid 4px;
+  position: relative
+}
 .loginSignUpSeparator {
   width: 100%; 
   text-align: center; 

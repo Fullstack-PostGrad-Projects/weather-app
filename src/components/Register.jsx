@@ -91,6 +91,7 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     handlePassword(event, event.currentTarget.formBasicPassword.value);
+    // console.log(event, event.currentTarget.formBasicPassword.value);
 
     navigate('/comingsoon')
   };

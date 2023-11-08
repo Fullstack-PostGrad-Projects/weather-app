@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {  Routes, Route } from 'react-router-dom';
-import {MyLocation, Geolocation, Homepage, Header, WrongPage, Register, CityProfile, Profile, ComingSoon, CityProfile7Day} from "./";
+import {MyLocation, Geolocation, Homepage, Header, WrongPage, Register, CityProfile, Profile, ComingSoon, CityProfile7Day, Login} from "./";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +21,8 @@ const App = () =>{
 
         <Route path='/comingsoon' element={<ComingSoon/>}/>
         <Route path='/profile' element={<Profile />} />
+        <Route path='/test' element={<Login />} />
+
 
 
 

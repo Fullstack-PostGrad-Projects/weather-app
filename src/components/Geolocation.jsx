@@ -13,6 +13,8 @@ import {
   GeoapifyGeocoderAutocomplete,
   GeoapifyContext,
 } from "@geoapify/react-geocoder-autocomplete";
+import "@geoapify/geocoder-autocomplete/styles/round-borders.css";
+
 
 function GeoapifyForm({ onPlaceSelect, onSuggestionChange }) {
   return (
@@ -107,8 +109,8 @@ const Geolocation = ({ button, setButton }) => {
     <>
       <Container className="box" fluid='xxl'>
         <h1>Search a City</h1>
-        <Form className="d-flex me-2" onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form className="d-flex me-2 citySearchContainer" onSubmit={handleSubmit}>
+          <Form.Group className="mb-3 searchBox" controlId="exampleForm.ControlTextarea1">
             <GeoapifyForm
               onPlaceSelect={handlePlaceSelect}
               onSuggestionChange={handleSuggestionChange}
