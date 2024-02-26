@@ -220,6 +220,8 @@ const CityProfile7Day = () => {
         {sevenDayForecast.map((day, idx) => {
           let dateDisplay = new Date(day[0].time).toDateString();
           const weatherDataSet = {};
+          day.Temperature = day.feelsLikeTemp
+          console.log(day)
           return (
             <Accordion key={idx} defaultActiveKey={idx === 0 ? idx : null}>
               <Accordion.Item eventKey={idx}>

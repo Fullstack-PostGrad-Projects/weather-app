@@ -4,7 +4,7 @@
   background-color: white;
 }
 .box{
-  background-color: teal;
+  /* background-color: teal; */
   height: 100%;
   width: 100vh;
 }
@@ -113,7 +113,7 @@
 } */
 
 .citySearchContainer{
-  border: blue solid 4px;
+  /* border: blue solid 4px; */
   position: relative
 }
 .loginSignUpSeparator {
